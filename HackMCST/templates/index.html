@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&family=Lexend:wght@100..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+  integrity="sha512-RfPrnLPRLvTovR1PfRqKho09dIgBpU7vR/mfo4xEIbhXexw1nBvheP5P8fhJOpyIeIam5q2D0DqKYl0HQ/E26w=="
+  crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style media="screen">
+/* 1. Use a more-intuitive box-sizing model. */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* 2. Remove default margin */
+* {
+    margin: 0;
+}
+
+/*
+3. Allow percentage-based heights in Figma
+*/
+html,
+body {
+    height: 100%;
+    scroll-behavior: smooth;
+}
+
+/*
+Typographic tweaks!
+4. Add accessible line-height
+5. Improve text rendering
+*/
+body {
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* 6. Improve media defaults */
+img,
+picture,
+video,
+canvas,
+svg {
+    display: block;
+    max-width: 100%;
+}
+
+/* 7. Remove built-in form typography styles */
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+/* 8. Avoid text overflows */
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    overflow-wrap: break-word;
+    color: white;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+    font-size: 1.2rem;
+}
+
+p {
+    font-size: 1.3rem;
+}
+
+/* 9. Create a root stacking context */
+#root,
+#__next {
+    isolation: isolate;
+}
+
+/* My CSS */
+
+body {
+    background-color: #0f0f0f;
+    background-image: url("{{url_for('static',filename='flow.jpg')}}");
+    background-size: cover;
+    font-family: "Lexend", sans-serif;
+    overflow-x: hidden;
+}
+
+.wrapper {
+  padding: 5%;
+}
+
+input{
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  margin: auto;
+  text-align: center;
+  font-size: 2rem;
+  color: white;
+  background : rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(20px);
+  width: 50%;
+  height: 3em;
+  border-radius: 10px;
+  border : 2px solid rgba(255,255,255,0.1);
+  opacity:40%;
+  transition : all 0.5s;
+}
+
+
+input:focus {
+  outline:none !important;
+  outline-width: 0 !important;
+  box-shadow: none;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  border : 2px solid rgba(255,255,255,0.8);
+  opacity:100%;
+  backdrop-filter: blur(20px);
+}
+
+.text-box{
+  padding:2%;
+  position: fixed;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  margin: auto;
+  text-align: center;
+  font-size: 2rem;
+  color: white;
+  background : rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(20px);
+  width: 50%;
+  height: 13em;
+  border-radius: 10px;
+  border: solid rgba(200, 200, 200, 0.5) 2px;
+  opacity: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  transition : all 0.5s;
+}
+
+@keyframes fade-down {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate(-50%, -60%);
+    -moz-transform: translate(-50%, -60%);
+    -o-transform: translate(-50%, -60%);
+    -ms-transform: translate(-50%, -60%);
+  }
+
+  100% {
+    opacity: 0.4;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+  }
+}
+
+.animate-down {
+  animation: fade-down 0.75s;
+}
+
+  </style>
+  <script type="text/javascript">
+    window.onload = function(){
+      document.getElementById("input").value = "Tell Serenity how you're feeling here";
+    }
+  </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <form class="" action="{{url_for('second_page')}}" method="post">
+        <input type="text" name="entry" id="input" value="Tell Serenity how you're feeling here" class="animate-down" onfocus="focus()" onblur="unfocus()">
+      </form>
+      <div class="text-box" id="text-box">
+        <p>How are you feeling today?</p>
+      </div>
+    </div>
+
+  </body>
+  <script type="text/javascript">
+    function increaseOpacityOnBlur(){
+      var element = document.getElementById("input");
+      var tb = document.getElementById("text-box");
+      element.addEventListener('blur',function(){
+        tb.style.opacity=1.0;
+      });
+      element.addEventListener('focus',function(){
+        tb.style.opacity=0.4;
+      });
+    }
+    increaseOpacityOnBlur();
+
+  </script>
+</html>
