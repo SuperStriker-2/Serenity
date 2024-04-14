@@ -2,7 +2,7 @@ from openai import OpenAI
 from flask import Flask, render_template, request
 
 client = OpenAI(
-    api_key="<insert API key here>"
+    api_key=OPENAI_KEY
 )
 
 def gpt(prompt):
